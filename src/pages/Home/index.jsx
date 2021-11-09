@@ -47,7 +47,7 @@ const Home = () => {
       <ContainerSeach>
         <Logo src={logo} alt="Logo do site" />
         <TextField
-          outlined
+          fullWidth
           label="Pesquisar"
           trailingIcon={<MaterialIcon role="button" icon="search" />}>
           <Input
@@ -57,14 +57,6 @@ const Home = () => {
             onChange={handleChange}
           />
         </TextField>
-
-        {/* <InputMaterialUi
-          type="text"
-          label="Pesquisar Restaurante"
-          value={inptValue}
-          onChange={handleChange}
-          InputProps={onKeyPress}
-        /> */}
       </ContainerSeach>
       <Container>
         <ContainerResultado>
