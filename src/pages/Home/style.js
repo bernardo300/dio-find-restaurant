@@ -13,7 +13,7 @@ export const ContainerSeach = styled.header`
   background-color: ${({ theme: { colors } }) => colors.background};
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 14vh;
   padding-left: 16px;
@@ -30,7 +30,7 @@ export const Container = styled.div`
 
 export const ContainerResultado = styled.aside`
   background-color: ${({ theme: { colors } }) => colors.background};
-  width: 360px;
+  width: 25%;
   height: 85vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -38,12 +38,13 @@ export const ContainerResultado = styled.aside`
 `;
 
 export const ContainerMapa = styled.aside`
-  width: 100%;
-  height: 85vh;
+  padding-left: 5px;
+  margin: 0;
 `;
 export const Logo = styled.img`
   align-self: center;
-  margin-right: 30px;
+  margin-right: 60px;
+  padding-left: 40px;
 `;
 
 export const CarrouselTitle = styled.h1`

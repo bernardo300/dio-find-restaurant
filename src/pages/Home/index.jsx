@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import TextField, { Input } from '@material/react-text-field';
-// import MaterialIcon from '@material/react-material-icon';
-import InputMaterialUi from 'input-material-ui';
+import TextField, { Input } from '@material/react-text-field';
+import MaterialIcon from '@material/react-material-icon';
+// import InputMaterialUi from 'input-material-ui';
 import logo from 'src/assets/logo.svg';
 import restaurant from 'src/assets/restaurante-fake.png';
 // import Slider from 'react-slick';
-import { ImageCard, RestaurantCard } from 'src/components';
+import { ImageCard, RestaurantCard, Modal, Map } from 'src/components';
 import {
   Wrapper,
   ContainerSeach,
@@ -29,19 +29,42 @@ const Home = () => {
   };
 
   const [inptValue, setInputValue] = useState('');
+  const [modalOponed, setModalOponed] = useState(false);
+  const [query, setQuery] = useState(null);
+
   const handleChange = (e) => {
-    setInputValue(e);
+    setInputValue(e.target.value);
   };
+  const handleKeyPress = (e) => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      setQuery(inptValue);
+    }
+  };
+
   return (
     <Wrapper>
       <ContainerSeach>
         <Logo src={logo} alt="Logo do site" />
-        <InputMaterialUi
+        <TextField
+          outlined
+          label="Pesquisar"
+          trailingIcon={<MaterialIcon role="button" icon="search" />}>
+          <Input
+            type="text"
+            value={inptValue}
+            onKeyPress={handleKeyPress}
+            onChange={handleChange}
+          />
+        </TextField>
+
+        {/* <InputMaterialUi
           type="text"
           label="Pesquisar Restaurante"
           value={inptValue}
           onChange={handleChange}
-        />
+          InputProps={onKeyPress}
+        /> */}
       </ContainerSeach>
       <Container>
         <ContainerResultado>
@@ -61,8 +84,11 @@ const Home = () => {
           <RestaurantCard />
           <RestaurantCard />
         </ContainerResultado>
-        <ContainerMapa />
+        <ContainerMapa>
+          <Map query={query} />
+        </ContainerMapa>
       </Container>
+      <Modal open={modalOponed} onClose={() => setModalOponed(!modalOponed)} />
     </Wrapper>
   );
 };
