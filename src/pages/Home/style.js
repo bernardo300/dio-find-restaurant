@@ -33,6 +33,7 @@ export const ContainerResultado = styled.aside`
   width: 360px;
   height: 85vh;
   overflow-y: auto;
+  overflow-x: hidden;
   border-radius: 5px;
 `;
 

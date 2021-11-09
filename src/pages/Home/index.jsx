@@ -57,6 +57,9 @@ const Home = () => {
             <ImageCard photo={restaurant} title="Hello" />
           </Carousel>
           <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
         </ContainerResultado>
         <ContainerMapa />
       </Container>
