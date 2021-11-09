@@ -1,1 +1,2 @@
-export { default as Card } from 'src/components/imageCard';
+export { default as ImageCard } from './ImageCard';
+export { default as RestaurantCard } from './RestaurantCard';

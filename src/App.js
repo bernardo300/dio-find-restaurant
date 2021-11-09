@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
 
-import Home from 'src/pages/home';
+import Home from 'src/pages/Home/index';
 import theme from './theme';
 
 function App() {
