@@ -3,7 +3,8 @@ import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 // import InputMaterialUi from 'input-material-ui';
 import logo from 'src/assets/logo.svg';
-import restaurant from 'src/assets/restaurante-fake.png';
+import fotoFake from 'src/assets/restaurante-fake.png';
+import { useSelector } from 'react-redux';
 // import Slider from 'react-slick';
 import { ImageCard, RestaurantCard, Modal, Map } from 'src/components';
 import {
@@ -18,6 +19,8 @@ import {
 } from './style';
 
 const Home = () => {
+  const { restaurants } = useSelector((state) => state.restaurants);
+  console.log(restaurants);
   const settings = {
     dots: false,
     infinite: true,
@@ -62,19 +65,17 @@ const Home = () => {
         <ContainerResultado>
           <CarrouselTitle> Na sua area</CarrouselTitle>
           <Carousel {...settings}>
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
-            <ImageCard photo={restaurant} title="Hello" />
+            {restaurants.map((restaurant) => (
+              <ImageCard
+                key={restaurant.place_id}
+                photo={restaurant.photos ? restaurant.photos[0].getUrl() : fotoFake}
+                title={restaurant.name}
+              />
+            ))}
           </Carousel>
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
+          {restaurants.map((restaurant) => (
+            <RestaurantCard restaurant={restaurant} />
+          ))}
         </ContainerResultado>
         <ContainerMapa>
           <Map query={query} />

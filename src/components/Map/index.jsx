@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch , useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 import { setRestaurants } from 'src/redux/modules/restaurants';
 
