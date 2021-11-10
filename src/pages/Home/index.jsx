@@ -6,7 +6,7 @@ import logo from 'src/assets/logo.svg';
 import fotoFake from 'src/assets/restaurante-fake.png';
 import { useSelector } from 'react-redux';
 // import Slider from 'react-slick';
-import { ImageCard, RestaurantCard, Modal, Map } from 'src/components';
+import { ImageCard, RestaurantCard, Modal, Map, Loader } from 'src/components';
 import {
   Wrapper,
   ContainerSeach,
@@ -72,13 +72,17 @@ const Home = () => {
         <ContainerResultado>
           <CarrouselTitle> Na sua area</CarrouselTitle>
           <Carousel {...settings}>
-            {restaurants.map((restaurant) => (
-              <ImageCard
-                key={restaurant.place_id}
-                photo={restaurant.photos ? restaurant.photos[0].getUrl() : fotoFake}
-                title={restaurant.name}
-              />
-            ))}
+            {restaurants.length > 0 ? (
+              restaurants.map((restaurant) => (
+                <ImageCard
+                  key={restaurant.place_id}
+                  photo={restaurant.photos ? restaurant.photos[0].getUrl() : fotoFake}
+                  title={restaurant.name}
+                />
+              ))
+            ) : (
+              <Loader />
+            )}
           </Carousel>
           {restaurants.map((restaurant) => (
             <RestaurantCard
