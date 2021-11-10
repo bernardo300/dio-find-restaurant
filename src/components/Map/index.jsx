@@ -14,46 +14,26 @@ export const Mapcontainer = (props) => {
   const { google, query, placeId } = props;
   const [map, setMap] = useState(null);
 
-  function getRestaurantById(placeId) {
-    const service = new google.maps.places.PlacesService(map);
-    dispatch(setRestaurant(null));
-
-    const request = {
-      placeId,
-      fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
-    };
-
-    service.getDetails(request, (place, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        dispatch(setRestaurant(place));
-      }
-    });
-  }
-
   useEffect(() => {
+    function getRestaurantById(placeId) {
+      const service = new google.maps.places.PlacesService(map);
+      dispatch(setRestaurant(null));
+
+      const request = {
+        placeId,
+        fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
+      };
+
+      service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          dispatch(setRestaurant(place));
+        }
+      });
+    }
     if (placeId) {
       getRestaurantById(placeId);
     }
   }, [placeId]);
-
-  const searchByQuery = (query) => {
-    const service = new google.maps.places.PlacesService(map);
-    dispatch(setRestaurants([]));
-
-    const request = {
-      location: map.center,
-      radius: '500',
-      type: ['restaurant'],
-      query,
-    };
-
-    service.textSearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results);
-        dispatch(setRestaurants(results));
-      }
-    });
-  };
 
   const searchNearby = (map, center) => {
     const service = new google.maps.places.PlacesService(map);
@@ -73,6 +53,24 @@ export const Mapcontainer = (props) => {
   };
 
   useEffect(() => {
+    const searchByQuery = (query) => {
+      const service = new google.maps.places.PlacesService(map);
+      dispatch(setRestaurants([]));
+
+      const request = {
+        location: map.center,
+        radius: '500',
+        type: ['restaurant'],
+        query,
+      };
+
+      service.textSearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          console.log(results);
+          dispatch(setRestaurants(results));
+        }
+      });
+    };
     if (query) {
       searchByQuery(query);
     }
