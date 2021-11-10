@@ -59,9 +59,9 @@ export const CarrouselTitle = styled.h1`
 
 export const Carousel = styled(Slider)`
   .slick-slide {
-    margin-right: 32px;
+    margin-right: 24px;
   }
-  margin: 5px;
+  max-height: 90px;
 `;
 
 export const ModalTitle = styled.p`

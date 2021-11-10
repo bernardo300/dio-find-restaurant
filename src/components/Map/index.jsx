@@ -54,7 +54,7 @@ export const Mapcontainer = (props) => {
       }
     });
   };
-  
+
   const searchNearby = (map, center) => {
     const service = new google.maps.places.PlacesService(map);
     dispatch(setRestaurant([]));
