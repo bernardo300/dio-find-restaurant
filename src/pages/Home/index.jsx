@@ -19,7 +19,7 @@ import {
 } from './style';
 
 const Home = () => {
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
   console.log(restaurants);
   const settings = {
     dots: false,
@@ -34,6 +34,7 @@ const Home = () => {
   const [inptValue, setInputValue] = useState('');
   const [modalOponed, setModalOponed] = useState(false);
   const [query, setQuery] = useState(null);
+  const [placeId, setPlaceId] = useState(null);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -45,6 +46,10 @@ const Home = () => {
     }
   };
 
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOponed(true);
+  }
   return (
     <Wrapper>
       <ContainerSeach>
@@ -74,14 +79,21 @@ const Home = () => {
             ))}
           </Carousel>
           {restaurants.map((restaurant) => (
-            <RestaurantCard restaurant={restaurant} />
+            <RestaurantCard
+              restaurant={restaurant}
+              onClick={() => handleOpenModal(restaurant.place_id)}
+            />
           ))}
         </ContainerResultado>
         <ContainerMapa>
-          <Map query={query} />
+          <Map query={query} placeId={placeId} />
         </ContainerMapa>
       </Container>
-      <Modal open={modalOponed} onClose={() => setModalOponed(!modalOponed)} />
+      <Modal open={modalOponed} onClose={() => setModalOponed(!modalOponed)}>
+        <p>{restaurantSelected?.name}</p>
+        <p> {restaurantSelected?.formatted_phone_number}</p>
+        <p> {restaurantSelected?.formatted_address}</p>
+      </Modal>
     </Wrapper>
   );
 };
