@@ -33,6 +33,7 @@ export const Mapcontainer = (props) => {
     if (placeId) {
       getRestaurantById(placeId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId]);
 
   const searchNearby = (map, center) => {
@@ -74,6 +75,7 @@ export const Mapcontainer = (props) => {
     if (query) {
       searchByQuery(query);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   function onMapReady(_, map) {
